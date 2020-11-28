@@ -4,7 +4,7 @@
 
     <groupId>antcar.springframework</groupId>
     <artifactId>spring-pet-clinic</artifactId>
-    <version>0.0.3</version>
+    <version>0.0.4-SNAPSHOT</version>
 
     <modules>
         <module>pet-clinic-data</module>
@@ -56,7 +56,7 @@
         <developerConnection>
             scm:git:https://github.com/antcar112/spring-pet-clinic.git
         </developerConnection>
-      <tag>spring-pet-clinic-0.0.3</tag>
+      <tag>HEAD</tag>
   </scm>
 
 </project>
