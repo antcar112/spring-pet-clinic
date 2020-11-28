@@ -53,9 +53,7 @@
     </build>
 
     <scm>
-        <developerConnection>
-            scm:git:https://github.com/antcar112/spring-pet-clinic.git
-        </developerConnection>
+        <developerConnection>scm:git:https://github.com/antcar112/spring-pet-clinic.git</developerConnection>
       <tag>HEAD</tag>
   </scm>
 
