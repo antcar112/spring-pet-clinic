@@ -4,8 +4,6 @@ import antcar.springframework.springpetclinic.model.Owner;
 import antcar.springframework.springpetclinic.model.Vet;
 import antcar.springframework.springpetclinic.services.OwnerService;
 import antcar.springframework.springpetclinic.services.VetService;
-import antcar.springframework.springpetclinic.services.map.OwnerServiceMap;
-import antcar.springframework.springpetclinic.services.map.VetServiceMap;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -16,9 +14,9 @@ public class DataLoader implements CommandLineRunner {
 
     private final VetService vetService;
 
-    public DataLoader() {
-        ownerService = new OwnerServiceMap();
-        vetService = new VetServiceMap();
+    public DataLoader(OwnerService ownerService, VetService vetService) {
+        this.ownerService = ownerService;
+        this.vetService = vetService;
     }
 
     @Override
