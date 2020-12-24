@@ -1,6 +1,7 @@
 package antcar.springframework.springpetclinic.bootstrap;
 
 import antcar.springframework.springpetclinic.model.Owner;
+import antcar.springframework.springpetclinic.model.Pet;
 import antcar.springframework.springpetclinic.model.PetType;
 import antcar.springframework.springpetclinic.model.Vet;
 import antcar.springframework.springpetclinic.services.OwnerService;
@@ -8,6 +9,8 @@ import antcar.springframework.springpetclinic.services.PetTypeService;
 import antcar.springframework.springpetclinic.services.VetService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
 
 @Component
 public class DataLoader implements CommandLineRunner {
@@ -30,12 +33,15 @@ public class DataLoader implements CommandLineRunner {
         PetType savedDogPetType = createPetType("Dog");
         PetType savedCatPetType = createPetType("Cat");
 
-        createOwner("Michael", "Weston");
-        createOwner("Fiona", "Glenanne");
+        Owner ownerMike = createOwner("Michael", "Weston", "123 Brickerel", "Miami", "801-555-8888");
+        Owner ownerFiona = createOwner("Fiona", "Glenanne", "123 Brickerel", "Miami", "801-555-8888");
         System.out.println("Loaded Owners...");
 
-        createVet("Sam", "Axe");
-        createVet("Jessie", "Porter");
+        Pet mikePet = createPet("Rosco", savedDogPetType, ownerMike, LocalDate.now());
+        Pet fionaPet = createPet("Kitty", savedCatPetType, ownerFiona, LocalDate.now());
+
+        Vet vetSame = createVet("Sam", "Axe");
+        Vet vetJessie = createVet("Jessie", "Porter");
         System.out.println("Loaded Vets...");
 
     }
@@ -46,11 +52,25 @@ public class DataLoader implements CommandLineRunner {
         return petTypeService.save(petType);
     }
 
-    private Owner createOwner(String firstName, String lastName) {
+    private Owner createOwner(String firstName, String lastName, String address, String city, String telephone) {
         Owner owner = new Owner();
         owner.setFirstName(firstName);
         owner.setLastName(lastName);
+        owner.setAddress(address);
+        owner.setCity(city);
+        owner.setTelephone(telephone);
         return ownerService.save(owner);
+    }
+
+    private Pet createPet(String name, PetType petType, Owner owner, LocalDate birthDate) {
+        Pet pet = new Pet();
+        pet.setName(name);
+        pet.setPetType(petType);
+        pet.setOwner(owner);
+        pet.setBirthDate(birthDate);
+
+        owner.getPets().add(pet);
+        return pet;
     }
 
     private Vet createVet(String firstName, String lastName) {
